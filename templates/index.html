@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Coiffeur — Barbershop</title>
+    <link rel="stylesheet" href="/static/style.css">
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 <body>
-    <h1>Prendre rendez-vous</h1>
-    <input type="date" name="date" hx-get="/creneaux" hx-trigger="change" hx-target="#liste" hx-include="[name='date']">
-    <div id="liste"></div>
+
+    <header>
+        <div class="header-left">
+            <span class="header-tag">Barbershop</span>
+            <h1>Le Coiffeur</h1>
+        </div>
+        <div class="header-right">
+            <span>Mar–Sam : 9h–19h</span>
+            <span>06 XX XX XX XX</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="booking">
+            <p class="section-label">Réserver un créneau</p>
+
+            <div class="date-picker">
+                <label for="date">Choisissez une date</label>
+                <input type="date" id="date" name="date"
+                    hx-get="/creneaux"
+                    hx-trigger="change"
+                    hx-target="#liste"
+                    hx-include="[name='date']">
+            </div>
+
+            <div id="liste"></div>
+        </section>
+    </main>
+
 </body>
 </html>

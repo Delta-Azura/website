@@ -21,6 +21,7 @@ func main() {
     if err != nil {
         panic(err)
     }
+    http.Handle("/static/", http.FileServer(http.Dir(".")))
     http.HandleFunc("/", indexHandler)
     http.HandleFunc("/creneaux", creneauxHandler)
     http.HandleFunc("/reserver", reserverHandler)

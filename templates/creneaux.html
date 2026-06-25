@@ -1,12 +1,16 @@
 {{range .}}
-<div>
-    <span>{{.Heure}}</span>
+<div class="creneau">
+    <span class="heure">{{.Heure}}</span>
     <input type="text" name="nom" placeholder="Votre nom" />
-    <button hx-post="/reserver"
-            hx-vals='{"heure": "{{.Heure}}", "date": "{{.Date}}"}'
-            hx-include="[name='nom']"
-            hx-target="#liste">
+    <button
+        hx-post="/reserver"
+        hx-vals='{"heure": "{{.Heure}}", "date": "{{.Date}}"}'
+        hx-include="[name='nom']"
+        hx-target="#liste">
         Réserver
     </button>
 </div>
+{{end}}
+{{if not .}}
+<p class="empty">Aucun créneau disponible ce jour.</p>
 {{end}}
