@@ -1,5 +1,9 @@
 module website
 
-go 1.22.2
+go 1.22
 
-require github.com/lib/pq v1.12.3 // indirect
+require (
+	github.com/gorilla/securecookie v1.1.2 // indirect
+	github.com/gorilla/sessions v1.2.2 // indirect
+	github.com/lib/pq v1.12.3 // indirect
+)

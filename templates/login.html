@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Le Coiffeur</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <span class="header-tag">Administration</span>
+            <h1>Le Coiffeur</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="booking">
+            <p class="section-label">Connexion</p>
+
+            {{if .}}
+            <p class="error">{{.}}</p>
+            {{end}}
+
+            <form method="POST" action="/admin/login" class="login-form">
+                <div class="field">
+                    <label>Identifiant</label>
+                    <input type="text" name="username" placeholder="Identifiant" autocomplete="username" />
+                </div>
+                <div class="field">
+                    <label>Mot de passe</label>
+                    <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" />
+                </div>
+                <button type="submit">Se connecter</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

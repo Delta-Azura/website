@@ -169,3 +169,83 @@ p.success {
     padding: 12px 0;
     letter-spacing: 0.05em;
 }
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 320px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field label {
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 0.05em;
+}
+
+.field input {
+    background: #1A1A1A;
+    border: 1px solid #2A2A2A;
+    color: #F5F0E8;
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.field input:focus {
+    border-color: #9A7A4A;
+}
+
+.field input::placeholder {
+    color: #444;
+}
+
+.login-form button {
+    background: #9A7A4A;
+    color: #111;
+    border: none;
+    padding: 10px 18px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 4px;
+}
+
+.login-form button:hover {
+    background: #B89058;
+}
+
+.client {
+    flex: 1;
+    font-size: 14px;
+    color: #9A7A4A;
+}
+
+.logout {
+    font-size: 12px;
+    color: #555;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.15s;
+}
+
+.logout:hover {
+    color: #9A7A4A;
+}
+
+p.error {
+    font-size: 13px;
+    color: #E24B4A;
+    margin-bottom: 16px;
+}

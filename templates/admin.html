@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Le Coiffeur</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <span class="header-tag">Administration</span>
+            <h1>Le Coiffeur</h1>
+        </div>
+        <div class="header-right">
+            <a href="/admin/logout" class="logout">Se déconnecter</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="booking">
+            <p class="section-label">Rendez-vous du jour</p>
+
+            <div class="date-picker">
+                <label for="date">Choisissez une date</label>
+                <input type="date" id="date" name="date" value="{{.Date}}"
+                    onchange="window.location.href='/admin?date='+this.value">
+            </div>
+
+            {{if .RDVs}}
+            <div id="liste">
+                {{range .RDVs}}
+                <div class="creneau">
+                    <span class="heure">{{.Heure}}</span>
+                    <span class="client">{{.Client}}</span>
+                </div>
+                {{end}}
+            </div>
+            {{else}}
+            <p class="empty">Aucun rendez-vous ce jour.</p>
+            {{end}}
+        </section>
+    </main>
+</body>
+</html>
