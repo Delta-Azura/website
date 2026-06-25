@@ -12,7 +12,15 @@ var db *sql.DB
 var tmpl = template.Must(template.ParseGlob("templates/*.html"))
 
 func main() {
-    db, _ = sql.Open("postgres", "user=coiffeuse dbname=rdv sslmode=disable")
+    var err error
+    db, err = sql.Open("postgres", "user=coiffeuse password=motdepasse dbname=rdv sslmode=disable")
+    if err != nil {
+        panic(err)
+    }
+    err = db.Ping()
+    if err != nil {
+        panic(err)
+    }
     http.HandleFunc("/", indexHandler)
     http.HandleFunc("/creneaux", creneauxHandler)
     http.HandleFunc("/reserver", reserverHandler)
