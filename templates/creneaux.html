@@ -3,7 +3,7 @@
     <span>{{.Heure}}</span>
     <input type="text" name="nom" placeholder="Votre nom" />
     <button hx-post="/reserver"
-            hx-vals='{"id": "{{.ID}}"}'
+            hx-vals='{"heure": "{{.Heure}}", "date": "{{.Date}}"}'
             hx-include="[name='nom']"
             hx-target="#liste">
         Réserver

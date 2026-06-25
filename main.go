@@ -32,26 +32,47 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func creneauxHandler(w http.ResponseWriter, r *http.Request) {
-    rows, _ := db.Query(
-        "SELECT id, heure FROM creneaux WHERE disponible = true ORDER BY heure",
+    date := r.FormValue("date")
+    if date == "" {
+        w.Write([]byte(`<p class="error">Veuillez sélectionner une date.</p>`))
+        return
+    }
+    touslescreneaux := []string{"09:00", "10:30", "14:00", "16:00"}
+    rows, err := db.Query(
+        "SELECT heure FROM creneaux WHERE disponible = false AND date = $1",
+        date,
     )
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
     defer rows.Close()
-
-    type Creneau struct{ ID int; Heure string }
-    var creneaux []Creneau
+    reserved := map[string]bool{}
     for rows.Next() {
-        var c Creneau
-        rows.Scan(&c.ID, &c.Heure)
-        creneaux = append(creneaux, c)
+        var heure string
+        rows.Scan(&heure)
+        reserved[heure] = true
+    }
+    type Creneau struct{ Heure string; Date string }
+    var creneaux []Creneau
+    for _, h := range touslescreneaux {
+        if !reserved[h] {
+            creneaux = append(creneaux, Creneau{Heure: h, Date: date})
+        }
+
     }
     tmpl.ExecuteTemplate(w, "creneaux.html", creneaux)
 }
 
 func reserverHandler(w http.ResponseWriter, r *http.Request) {
-    id := r.FormValue("id")
+    heure := r.FormValue("heure")
     nom := r.FormValue("nom")
+    date := r.FormValue("date")
+
     db.Exec(
-        "UPDATE creneaux SET disponible=false, client=$1 WHERE id=$2", nom, id,
+        "INSERT INTO creneaux (heure, date, disponible, client) VALUES ($1, $2, false, $3)",
+        heure, date, nom,
+    
     )
     w.Write([]byte(`<p class="success">Réservation confirmée !</p>`))
 }
