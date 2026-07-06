@@ -38,6 +38,7 @@ var adminPass = os.Getenv("ADMIN_PASS")
 
 
 func main() {
+    fmt.Println("test")
     var err error
     db, err = sql.Open("postgres", "user=coiffeuse password=motdepasse dbname=rdv sslmode=disable")
     if err != nil {
